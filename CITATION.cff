@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "ATLAS: Analytical Taxonomy for Literature Assessment in Science"
+message: "If you use this ontology, please cite it using the metadata from this file."
+type: dataset
+license: CC-BY-4.0
+version: 0.1.0
+date-released: "2026-04-08"
+url: "https://w3id.org/atlas/"
+repository-code: "https://github.com/TODO/atlas-ontology"
+keywords:
+  - ontology
+  - research integrity
+  - scientific literature
+  - unreliable publications
+  - pseudoscience
+  - research misconduct
+  - detection markers
+  - OWL
+  - FMEA

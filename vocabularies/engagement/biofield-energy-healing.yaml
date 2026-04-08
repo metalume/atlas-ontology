@@ -1,0 +1,86 @@
+# Biofield Energy Healing engagement vocabulary
+# Adds terms specific to this subtopic on top of parent
+# (vitalist-energy-medicine.yaml) and grandparent (pseudoscience-base.yaml).
+---
+domain: "atlas:BiofieldEnergyHealing"
+inherits_from: "atlas:VitalistEnergyMedicine"
+extraction_method:
+  source: "PubMed/HAL/Google Scholar title/abstract search: 'biofield', plus known Trivedi Effect corpus"
+  method: "Term extraction from source corpus, supplemented by manual review of Trivedi corpus"
+  date: "2026-04-08"
+  source_corpus_size: 312
+  source_corpus_method: "PubMed search result count for 'biofield' in title/abstract, 2026-04-08"
+
+terms:
+  - term: "biofield"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Core term. Does not appear in legitimate scientific literature except in critical reviews."
+
+  - term: "biofield energy"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Elaborated form of core term."
+
+  - term: "biofield treated"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Operational term indicating a sample or organism that received 'biofield treatment'. Characteristic of the Trivedi corpus."
+
+  - term: "biofield healer"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: domain_exclusive
+    rationale: "Refers to a practitioner claimed to transmit biofield energy."
+
+  - term: "trivedi effect"
+    classification: engagement
+    level: corpus_specific
+    general_frequency: domain_exclusive
+    rationale: "Branded name specific to the Trivedi publication network (~400 papers). Near-pathognomonic for this corpus family."
+
+  - term: "energy transmission process"
+    classification: engagement
+    level: corpus_specific
+    general_frequency: domain_exclusive
+    rationale: "Characteristic phrase from Trivedi corpus methodology sections."
+
+  - term: "biofield energy healing treatment"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Full operational phrase used in biofield study protocols."
+
+  - term: "non-contact therapeutic"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: rare
+    rationale: "Refers to claimed healing without physical contact. Requires context to disambiguate from legitimate non-contact measurement techniques."
+    context_required: "healing OR treatment OR therapy OR biofield"
+
+  - term: "human biofield"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Asserts the existence of a measurable human biofield."
+
+  - term: "biofield energy healers"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Plural form commonly used in methodology sections describing panels of healers."
+
+  - term: "sham healer"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: rare
+    rationale: "Term used in biofield study designs for control conditions. Its presence indicates the response is designing a biofield study."
+
+  - term: "energy healing treatment"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Operational term for the intervention in biofield studies."

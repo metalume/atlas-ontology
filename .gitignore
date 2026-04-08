@@ -1,0 +1,27 @@
+# JetBrains (IntelliJ, PyCharm, etc.)
+.idea/
+*.iws
+
+# VS Code
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.tox/
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+
+# OS-specific
+.DS_Store
+Thumbs.db

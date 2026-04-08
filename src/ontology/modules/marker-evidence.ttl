@@ -1,0 +1,152 @@
+@prefix atlas:   <https://w3id.org/atlas/ontology#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://w3id.org/atlas/ontology/modules/marker-evidence> a owl:Ontology ;
+    rdfs:comment "Links between detection markers and unreliability modes. Each link asserts that observing the marker is evidence for the mode, with a strength qualifier."@en .
+
+# =============================================================================
+# EVIDENCE PROPERTIES
+# =============================================================================
+
+atlas:evidenceFor a owl:ObjectProperty ;
+    rdfs:label "evidence for"@en ;
+    rdfs:comment "Asserts that observing this detection marker is evidence for the linked unreliability mode."@en ;
+    rdfs:domain atlas:DetectionMarker ;
+    rdfs:range atlas:UnreliabilityMode .
+
+atlas:evidenceStrength a owl:AnnotationProperty ;
+    rdfs:label "evidence strength"@en ;
+    rdfs:comment "Strength of the evidential link. Values: 'definitive' (marker alone is sufficient), 'strong' (high positive predictive value), 'moderate' (suggestive, needs corroboration), 'weak' (possible indicator, high false positive rate)."@en .
+
+# =============================================================================
+# TEXTUAL MARKER LINKS
+# =============================================================================
+
+atlas:TorturedPhrases
+    atlas:evidenceFor atlas:PapermillOperation ;
+    atlas:evidenceStrength "strong" .
+
+atlas:BoilerplateTemplateText
+    atlas:evidenceFor atlas:PapermillOperation ;
+    atlas:evidenceStrength "moderate" .
+
+atlas:BoilerplateTemplateText
+    atlas:evidenceFor atlas:DuplicatePublication ;
+    atlas:evidenceStrength "moderate" .
+
+atlas:VerbatimOverlap
+    atlas:evidenceFor atlas:TextPlagiarism ;
+    atlas:evidenceStrength "strong" .
+
+atlas:VerbatimOverlap
+    atlas:evidenceFor atlas:PapermillOperation ;
+    atlas:evidenceStrength "moderate" .
+
+# =============================================================================
+# DATA / FIGURE MARKER LINKS
+# =============================================================================
+
+atlas:ClonedImages
+    atlas:evidenceFor atlas:Falsification ;
+    atlas:evidenceStrength "strong" .
+
+atlas:ClonedImages
+    atlas:evidenceFor atlas:PapermillOperation ;
+    atlas:evidenceStrength "strong" .
+
+atlas:ImageManipulationArtifacts
+    atlas:evidenceFor atlas:Falsification ;
+    atlas:evidenceStrength "strong" .
+
+atlas:SyntheticSpectra
+    atlas:evidenceFor atlas:Fabrication ;
+    atlas:evidenceStrength "strong" .
+
+atlas:ImpossibleStatistics
+    atlas:evidenceFor atlas:Fabrication ;
+    atlas:evidenceStrength "moderate" .
+
+atlas:ImpossibleStatistics
+    atlas:evidenceFor atlas:Falsification ;
+    atlas:evidenceStrength "moderate" .
+
+atlas:ImpossibleStatistics
+    atlas:evidenceFor atlas:StatisticalMalpractice ;
+    atlas:evidenceStrength "weak" .
+
+atlas:SuspiciousDataRegularity
+    atlas:evidenceFor atlas:Fabrication ;
+    atlas:evidenceStrength "moderate" .
+
+atlas:DuplicatedDataTables
+    atlas:evidenceFor atlas:PapermillOperation ;
+    atlas:evidenceStrength "strong" .
+
+atlas:DuplicatedDataTables
+    atlas:evidenceFor atlas:Fabrication ;
+    atlas:evidenceStrength "moderate" .
+
+# =============================================================================
+# METADATA MARKER LINKS
+# =============================================================================
+
+atlas:PredatoryJournalIndexing
+    atlas:evidenceFor atlas:PredatoryJournalPublication ;
+    atlas:evidenceStrength "strong" .
+
+atlas:AnomalousReviewTimeline
+    atlas:evidenceFor atlas:CompromisedPeerReview ;
+    atlas:evidenceStrength "moderate" .
+
+atlas:AuthorClusterAnomaly
+    atlas:evidenceFor atlas:PapermillOperation ;
+    atlas:evidenceStrength "moderate" .
+
+atlas:AuthorClusterAnomaly
+    atlas:evidenceFor atlas:CitationManipulation ;
+    atlas:evidenceStrength "moderate" .
+
+atlas:CitationPatternAnomaly
+    atlas:evidenceFor atlas:CitationManipulation ;
+    atlas:evidenceStrength "definitive" .
+
+atlas:RetractionNotice
+    atlas:evidenceFor atlas:Fabrication ;
+    atlas:evidenceStrength "definitive" .
+
+atlas:RetractionNotice
+    atlas:evidenceFor atlas:Falsification ;
+    atlas:evidenceStrength "definitive" .
+
+atlas:RetractionNotice
+    atlas:evidenceFor atlas:TextPlagiarism ;
+    atlas:evidenceStrength "definitive" .
+
+atlas:ExpressionOfConcern
+    atlas:evidenceFor atlas:Falsification ;
+    atlas:evidenceStrength "moderate" .
+
+# =============================================================================
+# REPRODUCIBILITY MARKER LINKS
+# =============================================================================
+
+atlas:FailedIndependentReplication
+    atlas:evidenceFor atlas:Fabrication ;
+    atlas:evidenceStrength "moderate" .
+
+atlas:FailedIndependentReplication
+    atlas:evidenceFor atlas:PathologicalScience ;
+    atlas:evidenceStrength "moderate" .
+
+atlas:FailedIndependentReplication
+    atlas:evidenceFor atlas:StatisticalMalpractice ;
+    atlas:evidenceStrength "weak" .
+
+atlas:NonResponsiveAuthors
+    atlas:evidenceFor atlas:Fabrication ;
+    atlas:evidenceStrength "weak" .
+
+atlas:WithdrawnDataMethodology
+    atlas:evidenceFor atlas:Falsification ;
+    atlas:evidenceStrength "strong" .

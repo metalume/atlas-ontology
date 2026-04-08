@@ -1,0 +1,27 @@
+@prefix bfo:  <http://purl.obolibrary.org/obo/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Minimal BFO 2020 excerpt for ATLAS alignment.
+# Only the classes that ATLAS directly subclasses from are included.
+# Full BFO: https://basic-formal-ontology.org/
+
+<https://w3id.org/atlas/ontology/imports/bfo-excerpt> a owl:Ontology ;
+    rdfs:comment "Minimal excerpt from Basic Formal Ontology (BFO 2020) imported by ATLAS. Contains only those BFO classes from which ATLAS classes directly inherit."@en .
+
+bfo:BFO_0000001 a owl:Class ;
+    rdfs:label "entity"@en .
+
+bfo:BFO_0000002 a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000001 ;
+    rdfs:label "continuant"@en .
+
+bfo:BFO_0000020 a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000002 ;
+    rdfs:label "specifically dependent continuant"@en ;
+    rdfs:comment "An entity that depends on one or more specific independent continuants for its existence."@en .
+
+bfo:BFO_0000019 a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000020 ;
+    rdfs:label "quality"@en ;
+    rdfs:comment "A specifically dependent continuant that is exhibited if it inheres in an entity or entities at all."@en .

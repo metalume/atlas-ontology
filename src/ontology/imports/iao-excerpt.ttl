@@ -1,0 +1,20 @@
+@prefix iao:  <http://purl.obolibrary.org/obo/> .
+@prefix bfo:  <http://purl.obolibrary.org/obo/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Minimal IAO (Information Artifact Ontology) excerpt for ATLAS alignment.
+# Full IAO: https://github.com/information-artifact-ontology/IAO
+
+<https://w3id.org/atlas/ontology/imports/iao-excerpt> a owl:Ontology ;
+    rdfs:comment "Minimal excerpt from the Information Artifact Ontology (IAO) imported by ATLAS. Contains the information content entity class used as the basis for document annotation."@en .
+
+iao:IAO_0000030 a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000031 ;
+    rdfs:label "information content entity"@en ;
+    rdfs:comment "An entity that is generically dependent on some artifact and stands in relation of aboutness to some entity."@en .
+
+# BFO generically dependent continuant (parent of ICE)
+bfo:BFO_0000031 a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000002 ;
+    rdfs:label "generically dependent continuant"@en .

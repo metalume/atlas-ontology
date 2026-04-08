@@ -1,0 +1,123 @@
+# Magnetized water engagement vocabulary
+# Adds terms specific to this subtopic on top of parent
+# (magnetized-water.yaml) and grandparent (pseudoscience-base.yaml).
+---
+domain: "atlas:MagnetizedWater"
+inherits_from: "atlas:Pseudoscience"
+extraction_method:
+  source: "OpenAlex title/abstract search: magnetized water NOT (relaxation OR NMR OR resonance)"
+  method: "Term extraction from source corpus, supplemented by manual review"
+  date: "2026-04-08"
+  source_corpus_size: 960
+  source_corpus_method: "OpenAlex search result count, 2026-04-08"
+
+terms:
+  - term: "magnetized water"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Core term. Does not appear in legitimate scientific literature except in critical reviews."
+
+  - term: "magnetic field-treated water"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Elaborated form of core term."
+
+  - term: "MF-treated water"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Elaborated form of core term."
+
+  - term: "magnetic memory of water"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Claims water retains magnetic treatment effects for hours/days. No basis in mainstream physics."
+
+  - term: "water magnetization"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Treats magnetization as a persistent state of water. Distinct from NMR/MRI usage."
+
+  - term: "magnetizing water"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Verb form of core concept."
+
+  - term: "MW flooding"
+    classification: engagement
+    level: corpus_specific
+    general_frequency: domain_exclusive
+    rationale: "Application-specific term: injecting magnetized water into oil reservoirs for EOR."
+
+  - term: "magnetic water treatment"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Core operational phrase describing the intervention."
+    context_required: null
+
+  - term: "water magnetizer"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Device claimed to magnetize water. Commercial product category."
+
+  - term: "magnetized water memory"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Variant of 'magnetic memory of water'. Claims treated water retains altered properties."
+
+  - term: "smart fluid"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: rare
+    rationale: "Used to frame magnetized water as an engineered material. Legitimate in rheology (magnetorheological fluids), but in this corpus applied to plain water post-magnet exposure."
+    context_required: "magnetized water OR MW OR magnetic treatment"
+
+  - term: "green technology"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: common
+    rationale: "Framing device. Legitimate term elsewhere, but in this corpus used to legitimize magnetized water by claiming zero energy consumption and no chemical additives."
+    context_required: "magnetized water OR MW OR magnetic treatment OR water magnetiz"
+
+  - term: "zero energy consumption"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: rare
+    rationale: "Specific claim about permanent magnet water treatment requiring no energy input. Used as selling point."
+    context_required: "magnetized water OR magnetic treatment OR MW"
+
+  - term: "clean production process"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: common
+    rationale: "Framing device. Legitimate term in industrial ecology, but here applied to magnetized water EOR."
+    context_required: "magnetized water OR MW flooding"
+
+  - term: "MW treatment"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: rare
+    rationale: "Abbreviation used throughout corpus. MW = magnetized water. Context required to distinguish from microwave treatment."
+    context_required: "water OR magnetized OR magnetic treatment OR MW"
+
+  - term: "magnetization memory"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: rare
+    rationale: "Variant form appearing in EOR application context. Context required to distinguish from legitimate use of the term for ferromagnetic materials with hysteresis."
+    context_required: "water OR magnetized OR magnetic treatment OR MW"
+
+  - term: "memory effect"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: common
+    rationale: "Generic phrase, but in this corpus specifically refers to water 'remembering' magnetic treatment."
+    context_required: "water OR magnetized OR magnetic treatment OR MW"

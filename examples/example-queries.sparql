@@ -1,0 +1,74 @@
+# ATLAS Example SPARQL Queries
+# Run these against the example data in this directory to verify
+# competency questions are answerable.
+
+# ============================================================
+# CQ1: What unreliability modes does a document have?
+# ============================================================
+PREFIX atlas: <https://w3id.org/atlas/ontology#>
+PREFIX ex: <https://w3id.org/atlas/examples/>
+
+SELECT ?mode ?role WHERE {
+  {
+    ex:trivedi_2016_splenocyte atlas:primaryUnreliabilityMode ?mode .
+    BIND("primary" AS ?role)
+  } UNION {
+    ex:trivedi_2016_splenocyte atlas:secondaryUnreliabilityMode ?mode .
+    BIND("secondary" AS ?role)
+  }
+}
+
+# Expected:
+# atlas:BiofieldEnergyHealing  | primary
+# atlas:PredatoryJournalPublication | secondary
+# atlas:PapermillOperation | secondary
+
+
+# ============================================================
+# CQ2: Default severity of document's primary mode?
+# ============================================================
+PREFIX atlas: <https://w3id.org/atlas/ontology#>
+PREFIX ex: <https://w3id.org/atlas/examples/>
+
+SELECT ?severity WHERE {
+  ex:trivedi_2016_splenocyte atlas:primaryUnreliabilityMode ?mode .
+  ?mode atlas:defaultSeverity ?severity .
+}
+
+# Expected: 0.95
+
+
+# ============================================================
+# CQ5: What markers are evidence for papermill operation?
+# ============================================================
+PREFIX atlas: <https://w3id.org/atlas/ontology#>
+
+SELECT ?marker ?strength WHERE {
+  ?marker atlas:evidenceFor atlas:PapermillOperation .
+  ?marker atlas:evidenceStrength ?strength .
+}
+
+# Expected:
+# atlas:TorturedPhrases | strong
+# atlas:BoilerplateTemplateText | moderate
+# atlas:VerbatimOverlap | moderate
+# atlas:ClonedImages | strong
+# atlas:DuplicatedDataTables | strong
+# atlas:AuthorClusterAnomaly | moderate
+
+
+# ============================================================
+# CQ9: Full inherited vocabulary chain for BiofieldEnergyHealing
+# ============================================================
+PREFIX atlas: <https://w3id.org/atlas/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?ancestor ?lexiconFile WHERE {
+  atlas:BiofieldEnergyHealing rdfs:subClassOf* ?ancestor .
+  ?ancestor atlas:lexiconFile ?lexiconFile .
+}
+
+# Expected:
+# atlas:BiofieldEnergyHealing | engagement/biofield-energy-healing.yaml
+# atlas:VitalistEnergyMedicine | engagement/vitalist-energy-medicine.yaml
+# atlas:Pseudoscience | rejection/pseudoscience-base.yaml

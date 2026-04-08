@@ -1,0 +1,76 @@
+# Vitalist / Energy Medicine engagement vocabulary
+# Inherited by ALL children: biofield, reiki, therapeutic touch, orgone.
+# Terms at this level are shared across the vitalist pseudoscience family.
+---
+domain: "atlas:VitalistEnergyMedicine"
+inherits_from: "atlas:Pseudoscience"
+extraction_method:
+  source: "PubMed title/abstract search: 'energy healing' OR 'vital force' OR 'biofield' OR 'subtle energy', filtered to exclude legitimate biophysics"
+  method: "Term extraction from source corpus, filtered by manual review for pseudoscience-specificity"
+  date: "2026-04-08"
+  source_corpus_size: 480
+  source_corpus_method: "PubMed search result count, 2026-04-08"
+
+terms:
+  - term: "energy healing"
+    classification: engagement
+    level: domain_defining
+    general_frequency: rare
+    rationale: "Core term of the vitalist medicine domain. Does not appear in legitimate biomedical literature except in critical reviews."
+
+  - term: "subtle energy"
+    classification: engagement
+    level: domain_defining
+    general_frequency: domain_exclusive
+    rationale: "Central concept in vitalist frameworks. No legitimate scientific usage."
+
+  - term: "vital force"
+    classification: engagement
+    level: domain_defining
+    general_frequency: rare
+    rationale: "Historical vitalist concept. Appears in legitimate history-of-science contexts but not in operational scientific claims."
+    context_required: "healing OR treatment OR therapy OR biological"
+
+  - term: "healing energy"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: rare
+    rationale: "Characteristic phrase of vitalist medicine literature."
+
+  - term: "energy field"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: common
+    rationale: "Ambiguous without context — 'energy field' is legitimate in physics. Requires biological/healing context to count as vitalist engagement."
+    context_required: "human OR biological OR healing OR aura"
+
+  - term: "energy transmission"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: specialized
+    rationale: "In vitalist context, refers to claimed transmission of healing energy. Requires context disambiguation from legitimate physics/engineering usage."
+    context_required: "healer OR practitioner OR healing OR biofield"
+
+  - term: "energy treatment"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: rare
+    rationale: "Characteristic operational term in vitalist medicine."
+
+  - term: "complementary and alternative medicine"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: common
+    rationale: "CAM is a broad legitimate category. However, when used to frame vitalist claims as medical practice, it serves as engagement language. Lower confidence term."
+
+  - term: "energy practitioner"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: domain_exclusive
+    rationale: "Refers to a person claimed to transmit healing energy. No legitimate scientific usage."
+
+  - term: "distant healing"
+    classification: engagement
+    level: domain_characteristic
+    general_frequency: domain_exclusive
+    rationale: "Claims healing effects transmitted over distance. No legitimate scientific usage."

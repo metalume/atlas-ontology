@@ -1,0 +1,156 @@
+# ATLAS Lexicon File Schema
+# All vocabulary YAML files must conform to this structure.
+# See docs/term-classifications.md for classification semantics.
+# See docs/term-frequency-bands.md for general_frequency band definitions.
+---
+
+# ===========================================================================
+# Classification metadata (not part of main schema — reference data for
+# consumers who need to map classifications to numerical weights).
+# Ordinal rank: 1 = strongest rejection, 7 = strongest sanewashing.
+# Suggested weights are defaults; consumers may override.
+# ===========================================================================
+x-classification-metadata:
+  categorical_rejection:
+    ordinal_rank: 1
+    polarity: rejection
+    suggested_weight: 1.0
+    description: "Unambiguously labels the domain as non-scientific or invalid."
+  evidence_absence:
+    ordinal_rank: 2
+    polarity: rejection
+    suggested_weight: 0.75
+    description: "Asserts the absence of credible or reproducible evidence."
+  mechanism_absence:
+    ordinal_rank: 3
+    polarity: rejection
+    suggested_weight: 0.5
+    description: "Asserts the absence of a known or plausible causal mechanism."
+  sanewashing_mild:
+    ordinal_rank: 4
+    polarity: sanewashing
+    suggested_weight: -0.25
+    description: "Implies evidence or progress exists when it does not."
+  sanewashing:
+    ordinal_rank: 5
+    polarity: sanewashing
+    suggested_weight: -0.5
+    description: "Implies a legitimate two-sided debate where none exists."
+  sanewashing_strong:
+    ordinal_rank: 6
+    polarity: sanewashing
+    suggested_weight: -0.75
+    description: "Actively asserts legitimacy or positive evidence."
+  engagement:
+    ordinal_rank: null
+    polarity: engagement
+    suggested_weight: -1.0
+    description: "Domain-specific vocabulary indicating premise acceptance. Scored on a separate axis from rejection/sanewashing."
+
+# ===========================================================================
+# Schema proper
+# ===========================================================================
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "ATLAS Lexicon File"
+type: object
+required:
+  - domain
+  - inherits_from
+  - extraction_method
+  - terms
+properties:
+  domain:
+    type: string
+    description: >
+      The ATLAS class URI this lexicon belongs to.
+      Example: "atlas:BiofieldEnergyHealing"
+  inherits_from:
+    type: string
+    description: >
+      The parent class whose vocabulary is inherited.
+      Example: "atlas:VitalistEnergyMedicine"
+      Use "none" for root-level vocabularies.
+  extraction_method:
+    type: object
+    description: "How the terms were identified."
+    properties:
+      source:
+        type: string
+        description: "Corpus or ontology branch used."
+      method:
+        type: string
+        description: "Statistical or manual method used."
+      date:
+        type: string
+        format: date
+      source_corpus_size:
+        type: integer
+        description: >
+          Optional. Approximate number of documents in the literature
+          from which this vocabulary was extracted.
+      source_corpus_method:
+        type: string
+        description: >
+          Optional. How source_corpus_size was determined.
+          Example: "OpenAlex title/abstract search for 'biofield
+          energy healing', 2026-04-08"
+  terms:
+    type: array
+    items:
+      type: object
+      required:
+        - term
+        - classification
+      properties:
+        term:
+          type: string
+          description: "The term or short phrase."
+        classification:
+          type: string
+          enum:
+            - engagement
+            - categorical_rejection
+            - evidence_absence
+            - mechanism_absence
+            - sanewashing_mild
+            - sanewashing
+            - sanewashing_strong
+          description: >
+            Functional classification of the term.
+            See docs/term-classifications.md for semantics and
+            ordinal ranking.
+        level:
+          type: string
+          enum:
+            - domain_defining
+            - domain_characteristic
+            - corpus_specific
+          description: >
+            For engagement terms: specificity within the pseudoscience
+            domain hierarchy. Answers "where in the pseudoscience
+            taxonomy is this term diagnostic?" See
+            docs/term-frequency-bands.md for how this differs from
+            general_frequency.
+        general_frequency:
+          type: string
+          enum:
+            - common
+            - specialized
+            - rare
+            - domain_exclusive
+          description: >
+            Optional. How frequently this term or phrase is attested
+            in general-purpose corpora. Answers "how surprising is
+            this phrase in arbitrary text?" See
+            docs/term-frequency-bands.md for band definitions
+            and assignment method.
+        rationale:
+          type: string
+          description: "Why this term has this classification."
+        context_required:
+          type: string
+          description: >
+            Optional disambiguator. If present, the term only counts
+            as engagement when co-occurring with the specified
+            context words (OR-separated).
+            Example: "healing OR treatment OR therapy"

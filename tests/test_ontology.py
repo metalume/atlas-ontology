@@ -1,0 +1,146 @@
+"""ATLAS ontology test suite.
+
+Run with: python -m pytest tests/
+Requires: pip install rdflib pyyaml pytest
+"""
+
+import json
+import pytest
+from pathlib import Path
+
+from rdflib import Graph, Namespace, URIRef
+from rdflib.namespace import RDFS, OWL, RDF
+
+ATLAS = Namespace("https://w3id.org/atlas/ontology#")
+REPO_ROOT = Path(__file__).resolve().parent.parent
+ONTOLOGY_DIR = REPO_ROOT / "src" / "ontology"
+VOCAB_DIR = REPO_ROOT / "vocabularies"
+
+
+@pytest.fixture(scope="session")
+def graph():
+    """Load full ATLAS ontology."""
+    g = Graph()
+    for ttl_file in ONTOLOGY_DIR.rglob("*.ttl"):
+        g.parse(ttl_file, format="turtle")
+    return g
+
+
+def get_atlas_classes(g):
+    """Get all OWL classes in the ATLAS namespace."""
+    for cls in g.subjects(RDF.type, OWL.Class):
+        if isinstance(cls, URIRef) and str(cls).startswith(str(ATLAS)):
+            yield cls
+
+
+class TestParsing:
+    def test_all_ttl_files_parse(self):
+        """All .ttl files must parse without errors."""
+        for ttl_file in ONTOLOGY_DIR.rglob("*.ttl"):
+            g = Graph()
+            g.parse(ttl_file, format="turtle")  # Raises on parse error
+
+    def test_nonzero_triples(self, graph):
+        assert len(graph) > 100, "Ontology should have substantial content"
+
+
+class TestLabelsAndDefinitions:
+    def test_all_classes_have_labels(self, graph):
+        for cls in get_atlas_classes(graph):
+            label = graph.value(cls, RDFS.label)
+            assert label is not None, f"Missing rdfs:label on {cls}"
+
+    def test_unreliability_modes_have_definitions(self, graph):
+        for cls in get_atlas_classes(graph):
+            parents = set(graph.transitive_objects(cls, RDFS.subClassOf))
+            if ATLAS.UnreliabilityMode in parents:
+                defn = graph.value(cls, ATLAS.definition)
+                assert defn is not None, f"Missing definition on {cls}"
+
+    def test_detection_markers_have_definitions(self, graph):
+        for cls in get_atlas_classes(graph):
+            parents = set(graph.transitive_objects(cls, RDFS.subClassOf))
+            if ATLAS.DetectionMarker in parents:
+                defn = graph.value(cls, ATLAS.definition)
+                assert defn is not None, f"Missing definition on {cls}"
+
+
+class TestHierarchy:
+    def test_four_top_level_categories(self, graph):
+        """There should be exactly 4 direct children of UnreliabilityMode."""
+        children = list(graph.subjects(RDFS.subClassOf, ATLAS.UnreliabilityMode))
+        atlas_children = [c for c in children if str(c).startswith(str(ATLAS))]
+        assert len(atlas_children) == 4, (
+            f"Expected 4 top-level categories, got {len(atlas_children)}: "
+            f"{[str(c) for c in atlas_children]}"
+        )
+
+    def test_top_level_categories_correct(self, graph):
+        expected = {
+            ATLAS.DeliberateMisconduct,
+            ATLAS.PremiseLevelFailure,
+            ATLAS.InterpretiveFailure,
+            ATLAS.ExecutionLevelFailure,
+        }
+        children = set(graph.subjects(RDFS.subClassOf, ATLAS.UnreliabilityMode))
+        atlas_children = {c for c in children if str(c).startswith(str(ATLAS))}
+        assert atlas_children == expected
+
+
+class TestEvidenceLinks:
+    def test_all_evidence_links_have_strength(self, graph):
+        for s, p, o in graph.triples((None, ATLAS.evidenceFor, None)):
+            strength = graph.value(s, ATLAS.evidenceStrength)
+            assert strength is not None, (
+                f"Missing evidenceStrength on {s} -> {o}"
+            )
+
+    def test_evidence_strength_values_valid(self, graph):
+        valid = {"definitive", "strong", "moderate", "weak"}
+        for s, p, o in graph.triples((None, ATLAS.evidenceStrength, None)):
+            assert str(o) in valid, (
+                f"Invalid evidenceStrength '{o}' on {s}. "
+                f"Must be one of: {valid}"
+            )
+
+
+class TestLexiconFiles:
+    def test_referenced_lexicon_files_exist(self, graph):
+        for s, p, o in graph.triples((None, ATLAS.lexiconFile, None)):
+            filepath = VOCAB_DIR / str(o)
+            assert filepath.exists(), (
+                f"Lexicon file not found: {filepath} (referenced by {s})"
+            )
+
+    def test_lexicon_files_valid_yaml(self):
+        import yaml
+        for yaml_file in VOCAB_DIR.rglob("*.yaml"):
+            if yaml_file.name == "_schema.yaml":
+                continue
+            with open(yaml_file) as f:
+                data = yaml.safe_load(f)
+            assert "domain" in data, f"Missing 'domain' in {yaml_file}"
+            assert "terms" in data, f"Missing 'terms' in {yaml_file}"
+
+    def test_lexicon_terms_have_classification(self):
+        import yaml
+        for yaml_file in VOCAB_DIR.rglob("*.yaml"):
+            if yaml_file.name == "_schema.yaml":
+                continue
+            with open(yaml_file) as f:
+                data = yaml.safe_load(f)
+            for term in data.get("terms", []):
+                assert "term" in term, f"Missing 'term' field in {yaml_file}"
+                assert "classification" in term, (
+                    f"Missing 'classification' for term '{term.get('term')}' "
+                    f"in {yaml_file}"
+                )
+
+
+class TestSeverity:
+    def test_severity_values_in_range(self, graph):
+        for s, p, o in graph.triples((None, ATLAS.defaultSeverity, None)):
+            val = float(str(o))
+            assert 0.0 <= val <= 1.0, (
+                f"Severity {val} out of range [0,1] on {s}"
+            )
