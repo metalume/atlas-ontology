@@ -2,6 +2,7 @@
 @prefix iao:     <http://purl.obolibrary.org/obo/> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/atlas/ontology/modules/document-schema> a owl:Ontology ;
     rdfs:comment "Schema for annotating scientific documents with ATLAS classifications. Defines the AnnotatedDocument class and properties for linking documents to unreliability modes, detection markers, scientific domains, and corpus families. This module defines the schema (TBox); specific document annotations are ABox data maintained by consumers."@en .
@@ -61,3 +62,51 @@ atlas:estimatedSize a owl:DatatypeProperty ;
     rdfs:label "estimated corpus size"@en ;
     rdfs:comment "Approximate number of documents in this corpus family."@en ;
     rdfs:domain atlas:CorpusFamily .
+
+# =============================================================================
+# RETRACTION PROPERTIES
+# =============================================================================
+
+atlas:RetractionRecord a owl:Class ;
+    rdfs:label "retraction record"@en ;
+    rdfs:comment "Structured record of a paper's retraction status, including date, reason, severity, and any associated consequences."@en .
+
+atlas:retractionStatus a owl:ObjectProperty ;
+    rdfs:label "retraction status"@en ;
+    rdfs:domain atlas:AnnotatedDocument ;
+    rdfs:range atlas:RetractionRecord .
+
+atlas:retractionDate a owl:DatatypeProperty ;
+    rdfs:label "retraction date"@en ;
+    rdfs:domain atlas:RetractionRecord ;
+    rdfs:range xsd:date .
+
+atlas:retractionReason a owl:DatatypeProperty ;
+    rdfs:label "retraction reason"@en ;
+    rdfs:domain atlas:RetractionRecord ;
+    rdfs:range xsd:string .
+
+atlas:retractionSeverityValue a owl:DatatypeProperty ;
+    rdfs:label "retraction severity value"@en ;
+    rdfs:comment "Severity classification for this retraction record, used for document-level annotation and stratified reporting. Expected values: catastrophic, major, standard."@en ;
+    rdfs:domain atlas:RetractionRecord ;
+    rdfs:range xsd:string .
+
+atlas:retractionNoticeDOI a owl:DatatypeProperty ;
+    rdfs:label "retraction notice DOI"@en ;
+    rdfs:domain atlas:RetractionRecord ;
+    rdfs:range xsd:string .
+
+atlas:associatedPerson a owl:ObjectProperty ;
+    rdfs:label "associated person"@en ;
+    rdfs:domain atlas:RetractionRecord ;
+    rdfs:comment "Person associated with the misconduct, used for named-person scoring in TRACES."@en .
+
+atlas:personName a owl:DatatypeProperty ;
+    rdfs:label "person name"@en ;
+    rdfs:range xsd:string .
+
+atlas:legalConsequences a owl:DatatypeProperty ;
+    rdfs:label "legal consequences"@en ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Free text describing legal consequences: 'none', 'criminal conviction', 'civil settlement', etc."@en .

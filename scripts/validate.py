@@ -83,10 +83,17 @@ def check_evidence_links(g: Graph):
 
 
 def check_lexicon_files(g: Graph):
-    for s, p, o in g.triples((None, ATLAS.lexiconFile, None)):
-        filepath = VOCAB_DIR / str(o)
-        if not filepath.exists():
-            errors.append(f"Lexicon file not found: {filepath} (referenced by {s})")
+    lexicon_properties = (
+        ATLAS.lexiconFile,
+        ATLAS.retractionAwareLexiconFile,
+    )
+    for prop in lexicon_properties:
+        for s, p, o in g.triples((None, prop, None)):
+            filepath = VOCAB_DIR / str(o)
+            if not filepath.exists():
+                errors.append(
+                    f"Lexicon file not found: {filepath} (referenced by {s} via {p})"
+                )
 
 
 def main():

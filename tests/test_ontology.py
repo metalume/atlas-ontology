@@ -106,11 +106,16 @@ class TestEvidenceLinks:
 
 class TestLexiconFiles:
     def test_referenced_lexicon_files_exist(self, graph):
-        for s, p, o in graph.triples((None, ATLAS.lexiconFile, None)):
-            filepath = VOCAB_DIR / str(o)
-            assert filepath.exists(), (
-                f"Lexicon file not found: {filepath} (referenced by {s})"
-            )
+        lexicon_properties = (
+            ATLAS.lexiconFile,
+            ATLAS.retractionAwareLexiconFile,
+        )
+        for prop in lexicon_properties:
+            for s, p, o in graph.triples((None, prop, None)):
+                filepath = VOCAB_DIR / str(o)
+                assert filepath.exists(), (
+                    f"Lexicon file not found: {filepath} (referenced by {s} via {p})"
+                )
 
     def test_lexicon_files_valid_yaml(self):
         import yaml
@@ -135,7 +140,6 @@ class TestLexiconFiles:
                     f"Missing 'classification' for term '{term.get('term')}' "
                     f"in {yaml_file}"
                 )
-
 
 class TestSeverity:
     def test_severity_values_in_range(self, graph):

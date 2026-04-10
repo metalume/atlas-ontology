@@ -34,6 +34,38 @@ atlas:lexiconFile a owl:AnnotationProperty ;
     rdfs:label "lexicon file"@en ;
     rdfs:comment "Path to the YAML vocabulary file for this mode, relative to the vocabularies/ directory. Vocabulary inherits top-down: a mode's effective vocabulary includes its own terms plus all ancestor terms."@en .
 
+atlas:retractionAwareLexiconFile a owl:AnnotationProperty ;
+    rdfs:label "retraction-aware lexicon file"@en ;
+    rdfs:comment "Path to a YAML vocabulary file that is activated only for probes involving retracted source papers, rather than through the normal class inheritance chain."@en .
+
+atlas:UnreliabilityMode
+    atlas:retractionAwareLexiconFile "rejection/retracted-literature-base.yaml" .
+
+# --- Vocabulary inheritance note ---
+#
+# The retraction vocabulary does NOT participate in the normal vocabulary
+# inheritance chain. It is not inherited by subtopics. Instead, it is
+# activated per-probe based on the source paper's retraction_status field
+# in the probe metadata:
+#
+#   IF probe.source_paper.retraction_status is not null:
+#     effective_vocabulary = mode_vocabulary ∪ retraction_vocabulary
+#   ELSE:
+#     effective_vocabulary = mode_vocabulary
+#
+# This means a probe for a retracted pseudoscience paper uses BOTH the
+# pseudoscience-base vocabulary (testing science recognition) AND the
+# retraction vocabulary (testing retraction awareness). The two produce
+# independent signals that are combined at the block level.
+
+atlas:retractionSeverity a owl:AnnotationProperty ;
+    rdfs:label "retraction severity"@en ;
+    rdfs:comment """Classification of the severity of a retraction case,
+used in TRACES probe metadata for stratified reporting. Does not affect
+IS scoring (see TRACES spec: 'Why Not Severity-Weight the Headline
+Number'). Values: catastrophic, major, standard."""@en ;
+    rdfs:range xsd:string .
+
 # =============================================================================
 # ROOT CLASS
 # =============================================================================
