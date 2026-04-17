@@ -228,82 +228,82 @@ atlas:VitalistEnergyMedicine a owl:Class ;
     rdfs:subClassOf atlas:Pseudoscience ;
     rdfs:label "vitalist or energy medicine"@en ;
     atlas:definition "A pseudoscience that claims a non-physical 'energy', 'vital force', or 'biofield' can be directed by practitioners to cause measurable biological or physical effects. Distinguished from other pseudosciences by the invocation of vitalist mechanisms."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal ;
+    atlas:defaultSeverity "1.0"^^xsd:decimal ;
     atlas:lexiconFile "engagement/vitalist-energy-medicine.yaml" .
 
 atlas:BiofieldEnergyHealing a owl:Class ;
     rdfs:subClassOf atlas:VitalistEnergyMedicine ;
     rdfs:label "biofield energy healing"@en ;
     atlas:definition "A vitalist energy medicine pseudoscience that claims a human 'biofield' can be transmitted to alter material properties, biological processes, or health outcomes, including at a distance. Distinguished from other vitalist pseudosciences by the specific invocation of 'biofield' terminology and claims of remote transmission."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal ;
+    atlas:defaultSeverity "1.0"^^xsd:decimal ;
     atlas:lexiconFile "engagement/biofield-energy-healing.yaml" .
 
 atlas:ReikiMechanismStudies a owl:Class ;
     rdfs:subClassOf atlas:VitalistEnergyMedicine ;
     rdfs:label "Reiki mechanism studies"@en ;
     atlas:definition "A vitalist energy medicine pseudoscience that claims to identify physical or biological mechanisms for Reiki healing effects. Distinguished from clinical Reiki studies (which may be methodologically flawed but at least measure outcomes) by the assertion of specific causal mechanisms for the purported energy transfer."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal .
+    atlas:defaultSeverity "1.0"^^xsd:decimal .
 
 atlas:TherapeuticTouchMechanism a owl:Class ;
     rdfs:subClassOf atlas:VitalistEnergyMedicine ;
     rdfs:label "therapeutic touch mechanism claims"@en ;
     atlas:definition "A vitalist energy medicine pseudoscience that claims to identify mechanisms by which a practitioner's hands, held near but not touching a patient, alter physiological processes. Distinguished from other vitalist pseudosciences by the specific claim of non-contact manual manipulation of a 'human energy field'."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal .
+    atlas:defaultSeverity "1.0"^^xsd:decimal .
 
 atlas:OrgoneEnergy a owl:Class ;
     rdfs:subClassOf atlas:VitalistEnergyMedicine ;
     rdfs:label "orgone energy"@en ;
     atlas:definition "A vitalist energy medicine pseudoscience based on Wilhelm Reich's claim of a universal 'orgone energy' that can be accumulated and directed for biological effects. Distinguished from other vitalist pseudosciences by the specific theoretical framework derived from Reich."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal .
+    atlas:defaultSeverity "1.0"^^xsd:decimal .
 
 atlas:UltraHighDilution a owl:Class ;
     rdfs:subClassOf atlas:Pseudoscience ;
     rdfs:label "ultra-high dilution or memory of water"@en ;
     atlas:definition "A pseudoscience that claims substances retain biological or chemical activity at dilutions beyond Avogadro's limit, where no molecules of the original substance remain. Distinguished from other pseudosciences by the specific claim that water or other solvents retain a 'memory' of dissolved substances."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal .
+    atlas:defaultSeverity "1.0"^^xsd:decimal .
 
 atlas:HomeopathicPharmacology a owl:Class ;
     rdfs:subClassOf atlas:UltraHighDilution ;
     rdfs:label "homeopathic pharmacology"@en ;
     atlas:definition "An ultra-high dilution pseudoscience that claims homeopathic preparations (produced by serial dilution and succussion) have pharmacological activity attributable to the original substance. Distinguished from clinical homeopathy studies by the assertion of specific pharmacological mechanisms."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal .
+    atlas:defaultSeverity "1.0"^^xsd:decimal .
 
 atlas:WaterMemory a owl:Class ;
     rdfs:subClassOf atlas:UltraHighDilution ;
     rdfs:label "water memory"@en ;
     atlas:definition "An ultra-high dilution pseudoscience that claims water retains structural or informational properties of substances previously dissolved in it, even after dilution beyond molecular presence. Distinguished from homeopathic pharmacology by being the proposed underlying mechanism rather than an application."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal .
+    atlas:defaultSeverity "1.0"^^xsd:decimal .
 
 atlas:MagnetizedWater a owl:Class ;
     rdfs:subClassOf atlas:Pseudoscience ;
     rdfs:label "magnetized water"@en ;
     atlas:definition "A pseudoscience that claims liquid water water can be permanently or semi-permanently magnetized."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal ;
+    atlas:defaultSeverity "1.0"^^xsd:decimal ;
     atlas:lexiconFile "engagement/magnetized-water.yaml" .
 
 atlas:Parapsychology a owl:Class ;
     rdfs:subClassOf atlas:Pseudoscience ;
     rdfs:label "parapsychology"@en ;
     atlas:definition "A pseudoscience that claims humans possess abilities to perceive or influence the physical world through mechanisms not accounted for by established physics or neuroscience. Distinguished from other pseudosciences by the invocation of mental or psychic causation."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal .
+    atlas:defaultSeverity "1.0"^^xsd:decimal .
 
 atlas:ESPPrecognition a owl:Class ;
     rdfs:subClassOf atlas:Parapsychology ;
     rdfs:label "ESP or precognition"@en ;
     atlas:definition "A parapsychology pseudoscience that claims humans can perceive information without the use of known sensory channels, including perception of future events."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal .
+    atlas:defaultSeverity "1.0"^^xsd:decimal .
 
 atlas:Psychokinesis a owl:Class ;
     rdfs:subClassOf atlas:Parapsychology ;
     rdfs:label "psychokinesis"@en ;
     atlas:definition "A parapsychology pseudoscience that claims humans can influence physical objects or processes through mental intention alone."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal .
+    atlas:defaultSeverity "1.0"^^xsd:decimal .
 
 atlas:RemoteViewing a owl:Class ;
     rdfs:subClassOf atlas:Parapsychology ;
     rdfs:label "remote viewing"@en ;
     atlas:definition "A parapsychology pseudoscience that claims humans can perceive detailed information about distant or hidden targets through mental means alone."@en ;
-    atlas:defaultSeverity "0.95"^^xsd:decimal .
+    atlas:defaultSeverity "1.0"^^xsd:decimal .
 
 atlas:AntiEvidenceMedicine a owl:Class ;
     rdfs:subClassOf atlas:Pseudoscience ;
